@@ -134,6 +134,11 @@ button{
     font-weight:bold;
 }
 
+button:disabled{
+    opacity:.6;
+    cursor:wait;
+}
+
 .add-btn{
     background:#e8eef7;
     color:#0b2554;
@@ -237,414 +242,265 @@ footer{
 
 
 /* =========================================================
-   CERTIFICATE
+   CERTIFICATE STAGE
+   Vyeti viko nje ya skrini (off-screen) hivyo havionekani
+   chini ya website. Vinaonekana tu wakati wa kutengeneza PDF.
 ========================================================= */
 
-.certificate{
+#certStage{
+    position:fixed;
+    left:-10000px;
+    top:0;
+    width:297mm;
+    z-index:-1;
+    pointer-events:none;
+}
 
+.certificate{
     display:none;
 
     width:297mm;
-    height:210mm;
+    height:209mm;              /* 1mm chini ya A4 ili isitoke page ya pili */
 
     background:#fff;
-
     border:7px solid #0b6eb7;
 
-    outline:2px solid #c9a227;
-    outline-offset:-15px;
-
     padding:18mm 20mm;
-
     text-align:center;
-
     overflow:hidden;
-
     position:relative;
 }
 
+.certificate.active{
+    display:block;
+}
 
-/* TOP BRAND */
+/* Border ya dhahabu ya ndani (badala ya outline, kwa sababu
+   html2canvas haichori outline) */
+.certificate::before{
+    content:"";
+    position:absolute;
+    top:2mm;
+    left:2mm;
+    right:2mm;
+    bottom:2mm;
+    border:2px solid #c9a227;
+    pointer-events:none;
+}
 
 .cert-brand{
-
     font-size:28px;
-
     font-weight:bold;
-
     color:#0872b9;
-
     letter-spacing:4px;
-
     margin-top:2mm;
-
 }
-
-
-/* CERTIFICATE TITLE */
 
 .cert-title{
-
     font-size:22px;
-
     letter-spacing:5px;
-
     color:#555;
-
     margin-top:5px;
-
     font-weight:normal;
-
 }
-
-
-/* LINE */
 
 .cert-line{
-
     width:85%;
-
     height:1px;
-
     background:#999;
-
     margin:8px auto 12px;
-
 }
-
-
-/* PRESENTED TEXT */
 
 .presented{
-
     font-size:14px;
-
     color:#333;
-
     margin:5px 0;
-
 }
-
-
-/* STUDENT NAME */
 
 .cert-student{
-
     font-size:28px;
-
     font-weight:bold;
-
     color:#111;
-
     margin:8px 0;
-
     text-transform:uppercase;
-
 }
-
-
-/* DESCRIPTION */
 
 .cert-description{
-
     font-size:13px;
-
     color:#333;
-
     line-height:1.4;
-
     margin:8px auto 12px;
-
     max-width:220mm;
-
 }
-
 
 /* ================= RECORD TABLE ================= */
 
 .record-title{
-
     font-size:14px;
-
     color:#0b2554;
-
     font-weight:bold;
-
     margin:8px 0 5px;
-
     text-align:left;
-
 }
-
 
 .record-table{
-
     width:100%;
-
     border-collapse:collapse;
-
     margin:0 auto;
-
     font-size:11px;
-
 }
-
 
 .record-table th{
-
     background:#0b2554;
-
     color:white;
-
     padding:5px 6px;
-
     border:1px solid #0b2554;
-
 }
-
 
 .record-table td{
-
     padding:4px 6px;
-
     border:1px solid #cbd5e1;
-
     color:#222;
-
 }
-
 
 .record-table tr:nth-child(even){
-
     background:#f7f9fc;
-
 }
-
 
 .record-table .subject-name{
-
     text-align:left;
-
 }
-
 
 .record-table .number{
-
     text-align:center;
-
 }
 
+/* Masomo mengi -> jedwali linapungua ili litoshe page moja */
+.certificate.compact .record-table{ font-size:10px; }
+.certificate.compact .record-table th{ padding:3px 6px; }
+.certificate.compact .record-table td{ padding:2px 6px; }
+.certificate.compact .cert-description{ margin:4px auto 6px; }
+.certificate.compact .gpa-summary{ margin:6px 0; }
+
+.certificate.tiny .record-table{ font-size:9px; }
+.certificate.tiny .record-table td{ padding:1px 5px; }
 
 /* ================= GPA SUMMARY ================= */
 
 .gpa-summary{
-
     display:flex;
-
     justify-content:center;
-
     gap:12px;
-
     margin:10px 0;
-
 }
-
 
 .gpa-box-cert{
-
     min-width:45mm;
-
     border:2px solid #0b2554;
-
     padding:7px 14px;
-
     background:#fafafa;
-
 }
-
 
 .gpa-box-cert span{
-
     display:block;
-
     font-size:11px;
-
     font-weight:bold;
-
     color:#333;
-
 }
-
 
 .gpa-box-cert strong{
-
     display:block;
-
     font-size:21px;
-
     color:#0872b9;
-
     margin-top:2px;
-
 }
-
 
 /* ================= OVERALL CERT ================= */
 
 .overall-certificate{
-
     padding-top:22mm;
-
 }
-
 
 .overall-summary{
-
     display:flex;
-
     justify-content:center;
-
     gap:18px;
-
     margin:22px 0;
-
 }
-
 
 .overall-item{
-
     width:52mm;
-
     border:2px solid #0b2554;
-
     padding:12px;
-
 }
-
 
 .overall-item span{
-
     display:block;
-
     font-size:12px;
-
     font-weight:bold;
-
 }
-
 
 .overall-item strong{
-
     display:block;
-
     color:#0872b9;
-
     font-size:27px;
-
     margin-top:5px;
-
 }
-
 
 .overall-main{
-
     border:3px solid #c9a227;
-
     width:70mm;
-
     margin:25px auto;
-
     padding:12px;
-
 }
-
 
 .overall-main span{
-
     display:block;
-
     font-size:13px;
-
     font-weight:bold;
-
 }
-
 
 .overall-main strong{
-
     font-size:38px;
-
     color:#0872b9;
-
 }
-
 
 /* ================= BOTTOM ================= */
 
 .cert-bottom{
-
     position:absolute;
-
     left:20mm;
-
     right:20mm;
-
     bottom:13mm;
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:flex-end;
-
 }
-
 
 .signature{
-
     width:60mm;
-
     text-align:center;
-
     font-size:12px;
-
 }
-
 
 .signature-line{
-
     border-top:1px solid #222;
-
     margin-bottom:4px;
-
 }
-
 
 .cert-date{
-
     font-size:12px;
-
     color:#444;
-
 }
 
-
 .cert-footer{
-
     position:absolute;
-
     bottom:5mm;
-
     left:0;
-
     right:0;
-
     text-align:center;
-
     font-size:10px;
-
     color:#555;
-
 }
 
 
@@ -687,853 +543,397 @@ footer{
 
 
 /* =========================================================
-   PRINT
-   EXACTLY ONE PAGE
+   PRINT (fallback tu, ikiwa PDF library haijapakia)
+   Website nzima inafichwa kwa display:none (si visibility)
+   ili isiache kurasa tupu. Kinachobaki ni cheti kimoja tu.
 ========================================================= */
 
 @media print{
 
+    @page{
+        size:A4 landscape;
+        margin:0;
+    }
+
+    *{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
     html,
     body{
-
         width:297mm;
-
-        height:210mm;
-
+        height:auto;
         margin:0 !important;
-
         padding:0 !important;
-
-        background:white !important;
-
+        background:#fff !important;
     }
 
-
-    body *{
-
-        visibility:hidden !important;
-
+    #app{
+        display:none !important;
     }
 
-
-    .certificate,
-    .certificate *{
-
-        visibility:visible !important;
-
-    }
-
-
-    .certificate{
-
-        display:block !important;
-
-        position:absolute;
-
-        left:0;
-
-        top:0;
-
+    #certStage{
+        position:static !important;
+        left:auto !important;
         width:297mm;
-
-        height:210mm;
-
-        margin:0 !important;
-
-        padding:18mm 20mm;
-
-        overflow:hidden;
-
-        page-break-before:avoid !important;
-
-        page-break-after:avoid !important;
-
-        page-break-inside:avoid !important;
-
-        break-before:avoid !important;
-
-        break-after:avoid !important;
-
-        break-inside:avoid !important;
-
+        z-index:auto;
     }
 
-
-    @page{
-
-        size:A4 landscape;
-
+    .certificate.active{
+        display:block !important;
         margin:0;
-
+        page-break-inside:avoid;
+        break-inside:avoid;
     }
 
 }
 
 </style>
+
+<!-- PDF libraries: html2canvas + jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
 
 
 <body>
 
-
 <!-- =====================================================
-     NAVBAR
+     APP (website nzima iko ndani ya #app)
 ===================================================== -->
 
+<div id="app">
+
 <div class="navbar">
-
-    <div class="logo">
-        SINYAX GPA
-    </div>
-
-    <span>
-        Academic GPA Management
-    </span>
-
+    <div class="logo">SINYAX GPA</div>
+    <span>Academic GPA Management</span>
 </div>
 
 
 <div class="container">
 
-
-<!-- =====================================================
-     TITLE
-===================================================== -->
-
-<div class="page-title">
-
-    <h1>
-        GPA Calculator
-    </h1>
-
-    <p>
-        Calculate and manage your semester academic performance.
-    </p>
-
-</div>
-
-
-<!-- =====================================================
-     STUDENT
-===================================================== -->
-
-<div class="card">
-
-    <h2>
-        Student Information
-    </h2>
-
-    <div class="student-box">
-
-        <input
-            type="text"
-            id="student"
-            placeholder="Enter student full name"
-        >
-
+    <div class="page-title">
+        <h1>GPA Calculator</h1>
+        <p>Calculate and manage your semester academic performance.</p>
     </div>
 
-</div>
 
-
-<!-- =====================================================
-     SEMESTER 1
-===================================================== -->
-
-<div class="card">
-
-    <h2>
-        Semester 1
-    </h2>
-
-    <div id="sem1"></div>
-
-    <button
-        class="add-btn"
-        onclick="addSubject(1)"
-    >
-        + Add Subject
-    </button>
-
-    <button
-        class="calculate-btn"
-        onclick="calculate(1)"
-    >
-        Calculate GPA
-    </button>
-
-    <div
-        class="gpa-box"
-        id="gpa1"
-    >
-        Semester 1 GPA: —
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     SEMESTER 2
-===================================================== -->
-
-<div class="card">
-
-    <h2>
-        Semester 2
-    </h2>
-
-    <div id="sem2"></div>
-
-    <button
-        class="add-btn"
-        onclick="addSubject(2)"
-    >
-        + Add Subject
-    </button>
-
-    <button
-        class="calculate-btn"
-        onclick="calculate(2)"
-    >
-        Calculate GPA
-    </button>
-
-    <div
-        class="gpa-box"
-        id="gpa2"
-    >
-        Semester 2 GPA: —
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     OVERALL
-===================================================== -->
-
-<div class="card">
-
-    <div class="overall">
-
-        <h2>
-            Overall GPA
-        </h2>
-
-        <div
-            class="overall-number"
-            id="overallGPA"
-        >
-            —
+    <!-- STUDENT -->
+    <div class="card">
+        <h2>Student Information</h2>
+        <div class="student-box">
+            <input type="text" id="student" placeholder="Enter student full name">
         </div>
-
-        <button
-            style="
-            margin-top:15px;
-            background:white;
-            color:#0b2554;
-            "
-            onclick="calculateOverall()"
-        >
-            Calculate Overall GPA
-        </button>
-
     </div>
 
-</div>
 
+    <!-- SEMESTER 1 -->
+    <div class="card">
+        <h2>Semester 1</h2>
+        <div id="sem1"></div>
 
-<!-- =====================================================
-     CERTIFICATES
-===================================================== -->
+        <button class="add-btn" onclick="addSubject(1)">+ Add Subject</button>
+        <button class="calculate-btn" onclick="calculate(1)">Calculate GPA</button>
 
-<div class="card">
-
-    <h2>
-        Download Certificates
-    </h2>
-
-    <p style="color:#64748b">
-
-        Generate your academic certificate.
-
-    </p>
-
-    <div class="certificates">
-
-        <button
-            class="cert-btn"
-            onclick="printCertificate(1)"
-        >
-            📄 Semester 1 Certificate
-        </button>
-
-        <button
-            class="cert-btn"
-            onclick="printCertificate(2)"
-        >
-            📄 Semester 2 Certificate
-        </button>
-
-        <button
-            class="cert-btn"
-            onclick="printCertificate(3)"
-        >
-            🎓 Overall GPA Certificate
-        </button>
-
+        <div class="gpa-box" id="gpa1">Semester 1 GPA: —</div>
     </div>
 
-</div>
 
+    <!-- SEMESTER 2 -->
+    <div class="card">
+        <h2>Semester 2</h2>
+        <div id="sem2"></div>
 
-<!-- =====================================================
-     ABOUT
-===================================================== -->
+        <button class="add-btn" onclick="addSubject(2)">+ Add Subject</button>
+        <button class="calculate-btn" onclick="calculate(2)">Calculate GPA</button>
 
-<div class="card about">
-
-    <img
-        src="keovin.jpg"
-        alt="Keovin Sinyangwe"
-    >
-
-    <div>
-
-        <h2>
-            About the Developer
-        </h2>
-
-        <p>
-
-            <strong>
-                Keovin Sinyangwe
-            </strong>
-
-            is a young developer and digital creator
-            interested in technology, education and
-            practical digital solutions.
-
-        </p>
-
-        <p>
-            Building ideas. Creating solutions.
-        </p>
-
+        <div class="gpa-box" id="gpa2">Semester 2 GPA: —</div>
     </div>
 
-</div>
 
+    <!-- OVERALL -->
+    <div class="card">
+        <div class="overall">
+            <h2>Overall GPA</h2>
+            <div class="overall-number" id="overallGPA">—</div>
+
+            <button
+                style="margin-top:15px; background:white; color:#0b2554;"
+                onclick="calculateOverall()"
+            >
+                Calculate Overall GPA
+            </button>
+        </div>
+    </div>
+
+
+    <!-- CERTIFICATE BUTTONS -->
+    <div class="card">
+        <h2>Download Certificates</h2>
+
+        <p style="color:#64748b">Generate your academic certificate as a PDF.</p>
+
+        <div class="certificates">
+            <button class="cert-btn" onclick="downloadCertificate(1, this)">
+                📄 Semester 1 Certificate
+            </button>
+
+            <button class="cert-btn" onclick="downloadCertificate(2, this)">
+                📄 Semester 2 Certificate
+            </button>
+
+            <button class="cert-btn" onclick="downloadCertificate(3, this)">
+                🎓 Overall GPA Certificate
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ABOUT -->
+    <div class="card about">
+        <img src="keovin.jpg" alt="Keovin Sinyangwe">
+
+        <div>
+            <h2>About the Developer</h2>
+
+            <p>
+                <strong>Keovin Sinyangwe</strong>
+                is a young developer and digital creator
+                interested in technology, education and
+                practical digital solutions.
+            </p>
+
+            <p>Building ideas. Creating solutions.</p>
+        </div>
+    </div>
 
 </div>
 
 
 <footer>
-
     © 2026 Sinyax GPA Calculator ·
     Developed by Keovin Sinyangwe
-
 </footer>
+
+</div><!-- /#app -->
 
 
 <!-- =====================================================
-     SEMESTER 1 CERTIFICATE
+     CERTIFICATE STAGE (nje ya skrini, si sehemu ya website)
 ===================================================== -->
 
-<div
-    class="certificate"
-    id="certificate1"
->
+<div id="certStage">
 
-    <div class="cert-brand">
-        SINYAX
-    </div>
 
-    <div class="cert-title">
-        GPA APPRECIATION CERTIFICATE
-    </div>
+<!-- ============ SEMESTER 1 CERTIFICATE ============ -->
+<div class="certificate" id="certificate1">
 
+    <div class="cert-brand">SINYAX</div>
+    <div class="cert-title">GPA APPRECIATION CERTIFICATE</div>
     <div class="cert-line"></div>
 
-    <div class="presented">
-        This certificate is proudly presented to
-    </div>
+    <div class="presented">This certificate is proudly presented to</div>
 
-    <div
-        class="cert-student"
-        id="certName1"
-    >
-        STUDENT NAME
-    </div>
+    <div class="cert-student" id="certName1">STUDENT NAME</div>
 
     <div class="cert-description">
-
         In appreciation of successfully using
         <strong>Sinyax GPA Calculator</strong>
         to calculate academic performance for
         <strong>Semester 1</strong>.
-
     </div>
 
-
-    <div class="record-title">
-        SEMESTER 1 ACADEMIC RECORD
-    </div>
-
+    <div class="record-title">SEMESTER 1 ACADEMIC RECORD</div>
 
     <table class="record-table">
-
         <thead>
-
             <tr>
-
-                <th>
-                    #
-                </th>
-
-                <th>
-                    Subject
-                </th>
-
-                <th>
-                    Credits
-                </th>
-
-                <th>
-                    Grade
-                </th>
-
-                <th>
-                    Grade Point
-                </th>
-
-                <th>
-                    Weighted Points
-                </th>
-
+                <th>#</th>
+                <th>Subject</th>
+                <th>Credits</th>
+                <th>Grade</th>
+                <th>Grade Point</th>
+                <th>Weighted Points</th>
             </tr>
-
         </thead>
-
-        <tbody id="records1">
-
-        </tbody>
-
+        <tbody id="records1"></tbody>
     </table>
 
-
     <div class="gpa-summary">
-
         <div class="gpa-box-cert">
-
-            <span>
-                TOTAL CREDITS
-            </span>
-
-            <strong id="totalCredits1">
-                —
-            </strong>
-
+            <span>TOTAL CREDITS</span>
+            <strong id="totalCredits1">—</strong>
         </div>
 
-
         <div class="gpa-box-cert">
-
-            <span>
-                TOTAL POINTS
-            </span>
-
-            <strong id="totalPoints1">
-                —
-            </strong>
-
+            <span>TOTAL POINTS</span>
+            <strong id="totalPoints1">—</strong>
         </div>
 
-
         <div class="gpa-box-cert">
-
-            <span>
-                SEMESTER 1 GPA
-            </span>
-
-            <strong id="certificateGPA1">
-                —
-            </strong>
-
+            <span>SEMESTER 1 GPA</span>
+            <strong id="certificateGPA1">—</strong>
         </div>
-
     </div>
-
 
     <div class="cert-bottom">
-
         <div class="signature">
-
             <div class="signature-line"></div>
-
-            <strong>
-                Keovin Sinyangwe
-            </strong>
-
-            <br>
-
+            <strong>Keovin Sinyangwe</strong><br>
             Developer
-
         </div>
-
 
         <div class="cert-date">
-
-            Date:
-            <strong id="certDate1">
-                —
-            </strong>
-
+            Date: <strong id="certDate1">—</strong>
         </div>
-
 
         <div class="signature">
-
             <div class="signature-line"></div>
-
-            <strong>
-                SINYAX
-            </strong>
-
-            <br>
-
+            <strong>SINYAX</strong><br>
             GPA Calculator
-
         </div>
-
     </div>
 
-
-    <div class="cert-footer">
-
-        Keep learning. Keep growing. Keep achieving.
-
-    </div>
+    <div class="cert-footer">Keep learning. Keep growing. Keep achieving.</div>
 
 </div>
 
 
-<!-- =====================================================
-     SEMESTER 2 CERTIFICATE
-===================================================== -->
+<!-- ============ SEMESTER 2 CERTIFICATE ============ -->
+<div class="certificate" id="certificate2">
 
-<div
-    class="certificate"
-    id="certificate2"
->
-
-    <div class="cert-brand">
-        SINYAX
-    </div>
-
-    <div class="cert-title">
-        GPA APPRECIATION CERTIFICATE
-    </div>
-
+    <div class="cert-brand">SINYAX</div>
+    <div class="cert-title">GPA APPRECIATION CERTIFICATE</div>
     <div class="cert-line"></div>
 
-    <div class="presented">
-        This certificate is proudly presented to
-    </div>
+    <div class="presented">This certificate is proudly presented to</div>
 
-    <div
-        class="cert-student"
-        id="certName2"
-    >
-        STUDENT NAME
-    </div>
+    <div class="cert-student" id="certName2">STUDENT NAME</div>
 
     <div class="cert-description">
-
         In appreciation of successfully using
         <strong>Sinyax GPA Calculator</strong>
         to calculate academic performance for
         <strong>Semester 2</strong>.
-
     </div>
 
-
-    <div class="record-title">
-        SEMESTER 2 ACADEMIC RECORD
-    </div>
-
+    <div class="record-title">SEMESTER 2 ACADEMIC RECORD</div>
 
     <table class="record-table">
-
         <thead>
-
             <tr>
-
-                <th>
-                    #
-                </th>
-
-                <th>
-                    Subject
-                </th>
-
-                <th>
-                    Credits
-                </th>
-
-                <th>
-                    Grade
-                </th>
-
-                <th>
-                    Grade Point
-                </th>
-
-                <th>
-                    Weighted Points
-                </th>
-
+                <th>#</th>
+                <th>Subject</th>
+                <th>Credits</th>
+                <th>Grade</th>
+                <th>Grade Point</th>
+                <th>Weighted Points</th>
             </tr>
-
         </thead>
-
-        <tbody id="records2">
-
-        </tbody>
-
+        <tbody id="records2"></tbody>
     </table>
 
-
     <div class="gpa-summary">
-
         <div class="gpa-box-cert">
-
-            <span>
-                TOTAL CREDITS
-            </span>
-
-            <strong id="totalCredits2">
-                —
-            </strong>
-
+            <span>TOTAL CREDITS</span>
+            <strong id="totalCredits2">—</strong>
         </div>
 
-
         <div class="gpa-box-cert">
-
-            <span>
-                TOTAL POINTS
-            </span>
-
-            <strong id="totalPoints2">
-                —
-            </strong>
-
+            <span>TOTAL POINTS</span>
+            <strong id="totalPoints2">—</strong>
         </div>
 
-
         <div class="gpa-box-cert">
-
-            <span>
-                SEMESTER 2 GPA
-            </span>
-
-            <strong id="certificateGPA2">
-                —
-            </strong>
-
+            <span>SEMESTER 2 GPA</span>
+            <strong id="certificateGPA2">—</strong>
         </div>
-
     </div>
-
 
     <div class="cert-bottom">
-
         <div class="signature">
-
             <div class="signature-line"></div>
-
-            <strong>
-                Keovin Sinyangwe
-            </strong>
-
-            <br>
-
+            <strong>Keovin Sinyangwe</strong><br>
             Developer
-
         </div>
-
 
         <div class="cert-date">
-
-            Date:
-            <strong id="certDate2">
-                —
-            </strong>
-
+            Date: <strong id="certDate2">—</strong>
         </div>
-
 
         <div class="signature">
-
             <div class="signature-line"></div>
-
-            <strong>
-                SINYAX
-            </strong>
-
-            <br>
-
+            <strong>SINYAX</strong><br>
             GPA Calculator
-
         </div>
-
     </div>
 
-
-    <div class="cert-footer">
-
-        Keep learning. Keep growing. Keep achieving.
-
-    </div>
+    <div class="cert-footer">Keep learning. Keep growing. Keep achieving.</div>
 
 </div>
 
 
-<!-- =====================================================
-     OVERALL CERTIFICATE
-===================================================== -->
+<!-- ============ OVERALL CERTIFICATE ============ -->
+<div class="certificate overall-certificate" id="certificate3">
 
-<div
-    class="certificate overall-certificate"
-    id="certificate3"
->
-
-    <div class="cert-brand">
-        SINYAX
-    </div>
-
-    <div class="cert-title">
-        GPA APPRECIATION CERTIFICATE
-    </div>
-
+    <div class="cert-brand">SINYAX</div>
+    <div class="cert-title">GPA APPRECIATION CERTIFICATE</div>
     <div class="cert-line"></div>
 
-    <div class="presented">
-        This certificate is proudly presented to
-    </div>
+    <div class="presented">This certificate is proudly presented to</div>
 
-    <div
-        class="cert-student"
-        id="certName3"
-    >
-        STUDENT NAME
-    </div>
+    <div class="cert-student" id="certName3">STUDENT NAME</div>
 
     <div class="cert-description">
-
         In appreciation of successfully using
         <strong>Sinyax GPA Calculator</strong>
         to calculate and review academic performance
         for Semester 1 and Semester 2.
-
     </div>
-
 
     <div class="overall-summary">
-
         <div class="overall-item">
-
-            <span>
-                SEMESTER 1 GPA
-            </span>
-
-            <strong id="overall1">
-                —
-            </strong>
-
+            <span>SEMESTER 1 GPA</span>
+            <strong id="overall1">—</strong>
         </div>
 
-
         <div class="overall-item">
-
-            <span>
-                SEMESTER 2 GPA
-            </span>
-
-            <strong id="overall2">
-                —
-            </strong>
-
+            <span>SEMESTER 2 GPA</span>
+            <strong id="overall2">—</strong>
         </div>
-
     </div>
-
 
     <div class="overall-main">
-
-        <span>
-            OVERALL GPA
-        </span>
-
-        <strong id="overall3">
-            —
-        </strong>
-
+        <span>OVERALL GPA</span>
+        <strong id="overall3">—</strong>
     </div>
-
 
     <div class="cert-bottom">
-
         <div class="signature">
-
             <div class="signature-line"></div>
-
-            <strong>
-                Keovin Sinyangwe
-            </strong>
-
-            <br>
-
+            <strong>Keovin Sinyangwe</strong><br>
             Developer
-
         </div>
-
 
         <div class="cert-date">
-
-            Date:
-            <strong id="certDate3">
-                —
-            </strong>
-
+            Date: <strong id="certDate3">—</strong>
         </div>
-
 
         <div class="signature">
-
             <div class="signature-line"></div>
-
-            <strong>
-                SINYAX
-            </strong>
-
-            <br>
-
+            <strong>SINYAX</strong><br>
             GPA Calculator
-
         </div>
-
     </div>
 
-
-    <div class="cert-footer">
-
-        Keep learning. Keep growing. Keep achieving.
-
-    </div>
+    <div class="cert-footer">Keep learning. Keep growing. Keep achieving.</div>
 
 </div>
+
+
+</div><!-- /#certStage -->
 
 
 <script>
@@ -1543,21 +943,13 @@ footer{
 ===================================================== */
 
 const points = {
-
     A:5,
-
     "B+":4,
-
     B:3,
-
     C:2,
-
     D:1,
-
     E:0.5,
-
     F:0
-
 };
 
 
@@ -1565,37 +957,27 @@ const points = {
    STORAGE
 ===================================================== */
 
-let gpa = {
-
-    1:0,
-
-    2:0
-
-};
+let gpa     = { 1:0, 2:0 };
+let credits = { 1:0, 2:0 };
 
 
-let credits = {
+/* =====================================================
+   HELPERS
+===================================================== */
 
-    1:0,
+function setText(id, value){
+    document.getElementById(id).innerText = value;
+}
 
-    2:0
-
-};
-
-
-let totals = {
-
-    1:{
-        points:0,
-        credits:0
-    },
-
-    2:{
-        points:0,
-        credits:0
-    }
-
-};
+function esc(text){
+    return String(text).replace(/[&<>"']/g, ch => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+    }[ch]));
+}
 
 
 /* =====================================================
@@ -1604,61 +986,30 @@ let totals = {
 
 function addSubject(semester){
 
-    const container =
-        document.getElementById(
-            "sem" + semester
-        );
+    const container = document.getElementById("sem" + semester);
 
-
-    const row =
-        document.createElement("div");
-
-
+    const row = document.createElement("div");
     row.className = "subject";
-
 
     row.innerHTML = `
 
-        <input
-            type="text"
-            class="sub"
-            placeholder="Subject name"
-        >
+        <input type="text" class="sub" placeholder="Subject name">
 
-        <input
-            type="number"
-            class="credit"
-            placeholder="Credits"
-            min="1"
-        >
+        <input type="number" class="credit" placeholder="Credits" min="1">
 
         <select class="grade">
-
             <option value="A">A</option>
-
             <option value="B+">B+</option>
-
             <option value="B">B</option>
-
             <option value="C">C</option>
-
             <option value="D">D</option>
-
             <option value="E">E</option>
-
             <option value="F">F</option>
-
         </select>
 
-        <button
-            class="remove-btn"
-            onclick="this.parentElement.remove()"
-        >
-            ×
-        </button>
+        <button class="remove-btn" onclick="this.parentElement.remove()">×</button>
 
     `;
-
 
     container.appendChild(row);
 
@@ -1667,92 +1018,44 @@ function addSubject(semester){
 
 /* =====================================================
    CALCULATE GPA
+   Inarudisha true ikifanikiwa, false ikikosa credits
 ===================================================== */
 
 function calculate(semester){
 
-    const box =
-        document.getElementById(
-            "sem" + semester
-        );
+    const rows = document
+        .getElementById("sem" + semester)
+        .querySelectorAll(".subject");
 
-
-    const rows =
-        box.querySelectorAll(
-            ".subject"
-        );
-
-
-    let totalPoints = 0;
-
+    let totalPoints  = 0;
     let totalCredits = 0;
-
 
     rows.forEach(row => {
 
-        const credit =
-            Number(
-                row.querySelector(
-                    ".credit"
-                ).value
-            );
-
-
-        const grade =
-            row.querySelector(
-                ".grade"
-            ).value;
-
+        const credit = Number(row.querySelector(".credit").value);
+        const grade  = row.querySelector(".grade").value;
 
         if(credit > 0){
-
-            totalPoints +=
-                credit * points[grade];
-
-            totalCredits +=
-                credit;
-
+            totalPoints  += credit * points[grade];
+            totalCredits += credit;
         }
 
     });
 
-
     if(totalCredits === 0){
-
-        alert(
-            "Please enter subject credits first."
-        );
-
-        return;
-
+        alert("Please enter subject credits first.");
+        return false;
     }
 
+    gpa[semester]     = totalPoints / totalCredits;
+    credits[semester] = totalCredits;
 
-    gpa[semester] =
-        totalPoints /
-        totalCredits;
+    setText(
+        "gpa" + semester,
+        "Semester " + semester + " GPA: " + gpa[semester].toFixed(2)
+    );
 
-
-    credits[semester] =
-        totalCredits;
-
-
-    totals[semester].points =
-        totalPoints;
-
-
-    totals[semester].credits =
-        totalCredits;
-
-
-    document.getElementById(
-        "gpa" + semester
-    ).innerText =
-
-        "Semester " +
-        semester +
-        " GPA: " +
-        gpa[semester].toFixed(2);
+    return true;
 
 }
 
@@ -1761,40 +1064,24 @@ function calculate(semester){
    CALCULATE OVERALL
 ===================================================== */
 
+function getOverall(){
+    return (
+        gpa[1] * credits[1] + gpa[2] * credits[2]
+    ) / (
+        credits[1] + credits[2]
+    );
+}
+
 function calculateOverall(){
 
     if(!credits[1] || !credits[2]){
-
-        alert(
-            "Please calculate both Semester 1 and Semester 2 first."
-        );
-
+        alert("Please calculate both Semester 1 and Semester 2 first.");
         return;
-
     }
 
+    const overall = getOverall();
 
-    const overall =
-
-        (
-            gpa[1] * credits[1] +
-            gpa[2] * credits[2]
-        )
-
-        /
-
-        (
-            credits[1] +
-            credits[2]
-        );
-
-
-    document.getElementById(
-        "overallGPA"
-    ).innerText =
-
-        overall.toFixed(2);
-
+    setText("overallGPA", overall.toFixed(2));
 
     return overall;
 
@@ -1802,116 +1089,48 @@ function calculateOverall(){
 
 
 /* =====================================================
-   CREATE RECORDS
+   CREATE RECORDS (jedwali la masomo kwenye cheti)
 ===================================================== */
 
 function createRecords(semester){
 
-    const box =
-        document.getElementById(
-            "sem" + semester
-        );
+    const rows = document
+        .getElementById("sem" + semester)
+        .querySelectorAll(".subject");
 
-
-    const rows =
-        box.querySelectorAll(
-            ".subject"
-        );
-
-
-    const table =
-        document.getElementById(
-            "records" + semester
-        );
-
-
+    const table = document.getElementById("records" + semester);
     table.innerHTML = "";
 
-
-    let number = 1;
-
-    let totalPoints = 0;
-
+    let number       = 1;
+    let totalPoints  = 0;
     let totalCredits = 0;
-
 
     rows.forEach(row => {
 
-        const subject =
-            row.querySelector(
-                ".sub"
-            ).value.trim();
-
-
-        const credit =
-            Number(
-                row.querySelector(
-                    ".credit"
-                ).value
-            );
-
-
-        const grade =
-            row.querySelector(
-                ".grade"
-            ).value;
-
+        const subject = row.querySelector(".sub").value.trim();
+        const credit  = Number(row.querySelector(".credit").value);
+        const grade   = row.querySelector(".grade").value;
 
         if(credit > 0){
 
-            const gradePoint =
-                points[grade];
+            const gradePoint = points[grade];
+            const weighted   = credit * gradePoint;
 
+            totalPoints  += weighted;
+            totalCredits += credit;
 
-            const weighted =
-                credit * gradePoint;
-
-
-            totalPoints +=
-                weighted;
-
-
-            totalCredits +=
-                credit;
-
-
-            const tr =
-                document.createElement(
-                    "tr"
-                );
-
+            const tr = document.createElement("tr");
 
             tr.innerHTML = `
-
-                <td class="number">
-                    ${number}
-                </td>
-
-                <td class="subject-name">
-                    ${subject || "Unnamed Subject"}
-                </td>
-
-                <td class="number">
-                    ${credit}
-                </td>
-
-                <td class="number">
-                    ${grade}
-                </td>
-
-                <td class="number">
-                    ${gradePoint.toFixed(1)}
-                </td>
-
-                <td class="number">
-                    ${weighted.toFixed(2)}
-                </td>
-
+                <td class="number">${number}</td>
+                <td class="subject-name">${esc(subject) || "Unnamed Subject"}</td>
+                <td class="number">${credit}</td>
+                <td class="number">${grade}</td>
+                <td class="number">${gradePoint.toFixed(1)}</td>
+                <td class="number">${weighted.toFixed(2)}</td>
             `;
 
-
             table.appendChild(tr);
-
 
             number++;
 
@@ -1919,228 +1138,173 @@ function createRecords(semester){
 
     });
 
+    /* masomo mengi -> punguza ukubwa ili cheti kitoshe page moja */
+    const count = number - 1;
+    const cert  = document.getElementById("certificate" + semester);
+
+    cert.classList.toggle("compact", count > 9);
+    cert.classList.toggle("tiny",    count > 13);
 
     return {
-
-        points:totalPoints,
-
-        credits:totalCredits
-
+        points:  totalPoints,
+        credits: totalCredits
     };
 
 }
 
 
 /* =====================================================
-   PRINT CERTIFICATE
+   PREPARE CERTIFICATE
+   Inajaza data kwenye cheti. Inarudisha {id, file}
+   au null ikiwa kuna kitu kinakosekana.
 ===================================================== */
 
-function printCertificate(type){
+function prepareCertificate(type){
 
-    const student =
-        document.getElementById(
-            "student"
-        ).value.trim();
-
+    const student = document.getElementById("student").value.trim();
 
     if(!student){
+        alert("Please enter the student's full name first.");
+        return null;
+    }
 
-        alert(
-            "Please enter the student's full name first."
-        );
+    const name  = student.toUpperCase();
+    const today = new Date().toLocaleDateString("en-GB");
+    const safe  = student.replace(/[^\w\-]+/g, "_");
 
+    /* ----- SEMESTER 1 au 2 ----- */
+
+    if(type === 1 || type === 2){
+
+        /* hesabu upya ili cheti kilingane na data ya sasa */
+        if(!calculate(type)) return null;
+
+        const records = createRecords(type);
+
+        setText("certName" + type,       name);
+        setText("totalCredits" + type,   records.credits);
+        setText("totalPoints" + type,    records.points.toFixed(2));
+        setText("certificateGPA" + type, gpa[type].toFixed(2));
+        setText("certDate" + type,       today);
+
+        return {
+            id:   "certificate" + type,
+            file: "Sinyax_GPA_Semester" + type + "_" + safe + ".pdf"
+        };
+
+    }
+
+    /* ----- OVERALL ----- */
+
+    if(!calculate(1) || !calculate(2)) return null;
+
+    const overall = getOverall();
+
+    setText("overallGPA", overall.toFixed(2));
+    setText("certName3",  name);
+    setText("overall1",   gpa[1].toFixed(2));
+    setText("overall2",   gpa[2].toFixed(2));
+    setText("overall3",   overall.toFixed(2));
+    setText("certDate3",  today);
+
+    return {
+        id:   "certificate3",
+        file: "Sinyax_GPA_Overall_" + safe + ".pdf"
+    };
+
+}
+
+
+/* =====================================================
+   DOWNLOAD CERTIFICATE AS PDF (page moja, A4 landscape)
+===================================================== */
+
+async function downloadCertificate(type, btn){
+
+    const info = prepareCertificate(type);
+
+    if(!info) return;
+
+    const cert = document.getElementById(info.id);
+
+    document.querySelectorAll(".certificate").forEach(c => {
+        c.classList.remove("active");
+    });
+
+    cert.classList.add("active");
+
+    /* Ikiwa libraries hazijapakia (mfano hakuna internet) -> print */
+    const canPDF = window.html2canvas && window.jspdf && window.jspdf.jsPDF;
+
+    if(!canPDF){
+        printFallback(cert);
         return;
-
     }
 
+    const oldText = btn.textContent;
+    let usedPrint = false;
 
-    const today =
-        new Date().toLocaleDateString(
-            "en-GB"
+    btn.disabled    = true;
+    btn.textContent = "Preparing PDF...";
+
+    try{
+
+        const canvas = await html2canvas(cert, {
+
+            scale: 2,
+            backgroundColor: "#ffffff",
+            useCORS: true,
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: 1400,
+
+            /* kwenye nakala (clone) tunaleta cheti juu-kushoto */
+            onclone: doc => {
+
+                const app = doc.getElementById("app");
+                if(app) app.style.display = "none";
+
+                const stage = doc.getElementById("certStage");
+                stage.style.position = "absolute";
+                stage.style.left     = "0";
+                stage.style.top      = "0";
+
+            }
+
+        });
+
+        const pdf = new window.jspdf.jsPDF({
+            orientation: "landscape",
+            unit: "mm",
+            format: "a4"
+        });
+
+        /* cheti ni 297 x 209mm, A4 ni 297 x 210mm */
+        pdf.addImage(
+            canvas.toDataURL("image/jpeg", 0.95),
+            "JPEG",
+            0, 0.5, 297, 209
         );
 
+        pdf.save(info.file);
 
-    /* =================================================
-       SEMESTER 1
-    ================================================= */
+    }catch(error){
 
-    if(type === 1){
+        console.error(error);
 
-        if(!credits[1]){
+        alert("Could not create the PDF directly. Opening print instead.");
 
-            alert(
-                "Please calculate Semester 1 GPA first."
-            );
+        usedPrint = true;
+        printFallback(cert);
 
-            return;
+    }finally{
 
+        btn.disabled    = false;
+        btn.textContent = oldText;
+
+        if(!usedPrint){
+            cert.classList.remove("active");
         }
-
-
-        const records =
-            createRecords(1);
-
-
-        document.getElementById(
-            "certName1"
-        ).innerText =
-            student.toUpperCase();
-
-
-        document.getElementById(
-            "totalCredits1"
-        ).innerText =
-            records.credits;
-
-
-        document.getElementById(
-            "totalPoints1"
-        ).innerText =
-            records.points.toFixed(2);
-
-
-        document.getElementById(
-            "certificateGPA1"
-        ).innerText =
-            gpa[1].toFixed(2);
-
-
-        document.getElementById(
-            "certDate1"
-        ).innerText =
-            today;
-
-
-        showCertificate(
-            "certificate1"
-        );
-
-    }
-
-
-    /* =================================================
-       SEMESTER 2
-    ================================================= */
-
-    if(type === 2){
-
-        if(!credits[2]){
-
-            alert(
-                "Please calculate Semester 2 GPA first."
-            );
-
-            return;
-
-        }
-
-
-        const records =
-            createRecords(2);
-
-
-        document.getElementById(
-            "certName2"
-        ).innerText =
-            student.toUpperCase();
-
-
-        document.getElementById(
-            "totalCredits2"
-        ).innerText =
-            records.credits;
-
-
-        document.getElementById(
-            "totalPoints2"
-        ).innerText =
-            records.points.toFixed(2);
-
-
-        document.getElementById(
-            "certificateGPA2"
-        ).innerText =
-            gpa[2].toFixed(2);
-
-
-        document.getElementById(
-            "certDate2"
-        ).innerText =
-            today;
-
-
-        showCertificate(
-            "certificate2"
-        );
-
-    }
-
-
-    /* =================================================
-       OVERALL
-    ================================================= */
-
-    if(type === 3){
-
-        if(!credits[1] || !credits[2]){
-
-            alert(
-                "Please calculate both Semester 1 and Semester 2 first."
-            );
-
-            return;
-
-        }
-
-
-        const overall =
-
-            (
-                gpa[1] * credits[1] +
-                gpa[2] * credits[2]
-            )
-
-            /
-
-            (
-                credits[1] +
-                credits[2]
-            );
-
-
-        document.getElementById(
-            "certName3"
-        ).innerText =
-            student.toUpperCase();
-
-
-        document.getElementById(
-            "overall1"
-        ).innerText =
-            gpa[1].toFixed(2);
-
-
-        document.getElementById(
-            "overall2"
-        ).innerText =
-            gpa[2].toFixed(2);
-
-
-        document.getElementById(
-            "overall3"
-        ).innerText =
-            overall.toFixed(2);
-
-
-        document.getElementById(
-            "certDate3"
-        ).innerText =
-            today;
-
-
-        showCertificate(
-            "certificate3"
-        );
 
     }
 
@@ -2148,44 +1312,19 @@ function printCertificate(type){
 
 
 /* =====================================================
-   SHOW CERTIFICATE
+   PRINT FALLBACK
 ===================================================== */
 
-function showCertificate(id){
+function printFallback(cert){
 
-    document
-        .querySelectorAll(
-            ".certificate"
-        )
-        .forEach(cert => {
+    const done = () => {
+        cert.classList.remove("active");
+        window.removeEventListener("afterprint", done);
+    };
 
-            cert.style.display =
-                "none";
+    window.addEventListener("afterprint", done);
 
-        });
-
-
-    const certificate =
-        document.getElementById(
-            id
-        );
-
-
-    certificate.style.display =
-        "block";
-
-
-    /*
-       Give browser enough time to
-       render the certificate before
-       opening print preview.
-    */
-
-    setTimeout(() => {
-
-        window.print();
-
-    }, 500);
+    setTimeout(() => window.print(), 300);
 
 }
 
@@ -2195,7 +1334,6 @@ function showCertificate(id){
 ===================================================== */
 
 addSubject(1);
-
 addSubject(2);
 
 </script>
