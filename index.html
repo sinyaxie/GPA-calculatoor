@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sinyax GPA Calculator</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f7fa;
+    color:#1f2937;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#0b2554;
+    color:white;
+    padding:16px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:bold;
+    letter-spacing:.5px;
+}
+
+.navbar span{
+    font-size:13px;
+    color:#cbd5e1;
+}
+
+/* MAIN */
+.container{
+    max-width:1000px;
+    margin:30px auto;
+    padding:0 18px;
+}
+
+/* PAGE TITLE */
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    margin:0 0 7px;
+    font-size:28px;
+    color:#0b2554;
+}
+
+.page-title p{
+    margin:0;
+    color:#64748b;
+}
+
+/* CARD */
+.card{
+    background:white;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    padding:22px;
+    margin-bottom:20px;
+}
+
+.card h2{
+    margin-top:0;
+    color:#0b2554;
+    font-size:19px;
+}
+
+/* INPUT */
+input,
+select{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #cbd5e1;
+    border-radius:6px;
+    outline:none;
+    background:white;
+    font-size:14px;
+}
+
+input:focus,
+select:focus{
+    border-color:#0b2554;
+}
+
+/* STUDENT */
+.student-box{
+    max-width:450px;
+}
+
+/* SUBJECT */
+.subject{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr auto;
+    gap:8px;
+    margin-bottom:9px;
+}
+
+.remove-btn{
+    background:#dc2626;
+    color:white;
+    border:0;
+    border-radius:6px;
+    padding:0 13px;
+    cursor:pointer;
+}
+
+.remove-btn:hover{
+    background:#b91c1c;
+}
+
+/* BUTTONS */
+button{
+    border:0;
+    border-radius:6px;
+    padding:11px 16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.add-btn{
+    background:#e8eef7;
+    color:#0b2554;
+}
+
+.calculate-btn{
+    background:#0b2554;
+    color:white;
+    margin-left:6px;
+}
+
+.add-btn:hover,
+.calculate-btn:hover{
+    opacity:.9;
+}
+
+/* GPA */
+.gpa-box{
+    margin-top:16px;
+    background:#f1f5f9;
+    border-left:4px solid #0b2554;
+    padding:15px;
+    font-size:18px;
+    font-weight:bold;
+    color:#0b2554;
+}
+
+/* OVERALL */
+.overall{
+    text-align:center;
+    background:#0b2554;
+    color:white;
+    border-radius:10px;
+    padding:24px;
+}
+
+.overall h2{
+    color:white;
+    margin:0 0 10px;
+}
+
+.overall-number{
+    font-size:38px;
+    font-weight:bold;
+}
+
+/* CERTIFICATES */
+.certificates{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.cert-btn{
+    background:white;
+    border:1px solid #cbd5e1;
+    color:#0b2554;
+    padding:15px;
+}
+
+.cert-btn:hover{
+    background:#f1f5f9;
+}
+
+/* ABOUT */
+.about{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.about img{
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid #0b2554;
+}
+
+.about h2{
+    margin-bottom:5px;
+}
+
+.about p{
+    color:#64748b;
+    line-height:1.6;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:25px;
+    color:#64748b;
+    font-size:13px;
+}
+
+/* CERTIFICATE */
+.certificate{
+    display:none;
+    width:900px;
+    min-height:630px;
+    margin:auto;
+    padding:55px;
+    background:white;
+    border:12px solid #0b2554;
+    outline:2px solid #c9a227;
+    outline-offset:-25px;
+    text-align:center;
+}
+
+.certificate .brand{
+    font-size:22px;
+    font-weight:bold;
+    color:#0b2554;
+}
+
+.certificate h1{
+    color:#0b2554;
+    font-size:32px;
+    margin:18px 0 5px;
+}
+
+.certificate h2{
+    color:#c9a227;
+}
+
+.certificate-name{
+    font-size:30px;
+    font-weight:bold;
+    color:#111827;
+    margin:25px 0;
+}
+
+.certificate-description{
+    max-width:650px;
+    margin:auto;
+    line-height:1.7;
+    color:#475569;
+}
+
+.cert-stats{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin:30px 0;
+}
+
+.cert-stat{
+    border:2px solid #0b2554;
+    padding:14px 30px;
+    min-width:160px;
+}
+
+.cert-stat strong{
+    display:block;
+    font-size:24px;
+    color:#0b2554;
+    margin-top:5px;
+}
+
+.signature{
+    margin-top:35px;
+    font-family:cursive;
+    font-size:26px;
+}
+
+@media(max-width:700px){
+
+    .navbar{
+        padding:15px 20px;
+    }
+
+    .subject{
+        grid-template-columns:1fr;
+    }
+
+    .calculate-btn{
+        margin:8px 0 0;
+    }
+
+    .certificates{
+        grid-template-columns:1fr;
+    }
+
+    .about{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .certificate{
+        width:100%;
+        padding:40px 20px;
+    }
+
+    .cert-stats{
+        flex-direction:column;
+        align-items:center;
+    }
+}
+
+/* PRINT */
+@media print{
+
+    body *{
+        visibility:hidden;
+    }
+
+    .certificate,
+    .certificate *{
+        visibility:visible;
+    }
+
+    .certificate{
+        display:block !important;
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+        margin:0;
+    }
+
+    @page{
+        size:A4 landscape;
+        margin:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">SINYAX GPA</div>
+    <span>Academic GPA Management</span>
+</div>
+
+<div class="container">
+
+    <div class="page-title">
+        <h1>GPA Calculator</h1>
+        <p>Calculate and manage your semester academic performance.</p>
+    </div>
+
+    <!-- STUDENT -->
+    <div class="card">
+        <h2>Student Information</h2>
+
+        <div class="student-box">
+            <input
+                type="text"
+                id="student"
+                placeholder="Enter student full name"
+            >
+        </div>
+    </div>
+
+    <!-- SEMESTER 1 -->
+    <div class="card">
+
+        <h2>Semester 1</h2>
+
+        <div id="sem1"></div>
+
+        <button class="add-btn" onclick="addSubject(1)">
+            + Add Subject
+        </button>
+
+        <button class="calculate-btn" onclick="calculate(1)">
+            Calculate GPA
+        </button>
+
+        <div class="gpa-box" id="gpa1">
+            Semester 1 GPA: —
+        </div>
+
+    </div>
+
+    <!-- SEMESTER 2 -->
+    <div class="card">
+
+        <h2>Semester 2</h2>
+
+        <div id="sem2"></div>
+
+        <button class="add-btn" onclick="addSubject(2)">
+            + Add Subject
+        </button>
+
+        <button class="calculate-btn" onclick="calculate(2)">
+            Calculate GPA
+        </button>
+
+        <div class="gpa-box" id="gpa2">
+            Semester 2 GPA: —
+        </div>
+
+    </div>
+
+    <!-- OVERALL -->
+    <div class="card">
+
+        <div class="overall">
+
+            <h2>Overall GPA</h2>
+
+            <div class="overall-number" id="overallGPA">
+                —
+            </div>
+
+            <button
+                style="margin-top:15px;background:white;color:#0b2554"
+                onclick="calculateOverall()"
+            >
+                Calculate Overall GPA
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- CERTIFICATES -->
+    <div class="card">
+
+        <h2>Download Certificates</h2>
+
+        <p style="color:#64748b">
+            Generate and save the academic certificate you need.
+        </p>
+
+        <div class="certificates">
+
+            <button class="cert-btn" onclick="printCertificate(1)">
+                📄 Semester 1 Certificate
+            </button>
+
+            <button class="cert-btn" onclick="printCertificate(2)">
+                📄 Semester 2 Certificate
+            </button>
+
+            <button class="cert-btn" onclick="printCertificate(3)">
+                🎓 Overall GPA Certificate
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ABOUT -->
+    <div class="card about">
+
+        <img src="keovin.jpg" alt="Keovin Sinyangwe">
+
+        <div>
+
+            <h2>About the Developer</h2>
+
+            <p>
+                <strong>Keovin Sinyangwe</strong> is a young developer
+                and digital creator interested in technology, education
+                and practical digital solutions.
+            </p>
+
+            <p>
+                Building ideas. Creating solutions.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Sinyax GPA Calculator · Developed by Keovin Sinyangwe
+</footer>
+
+
+<!-- ================= CERTIFICATE 1 ================= -->
+
+<div class="certificate" id="certificate1">
+
+    <div class="brand">SINYAX</div>
+
+    <h1>ACADEMIC CERTIFICATE</h1>
+
+    <h2>Semester 1 GPA</h2>
+
+    <p>This certificate is presented to</p>
+
+    <div class="certificate-name" id="name1">
+        Student Name
+    </div>
+
+    <p class="certificate-description">
+        This certificate recognizes the successful calculation
+        and completion of the Semester 1 GPA assessment using
+        Sinyax GPA Calculator.
+    </p>
+
+    <div class="cert-stats">
+
+        <div class="cert-stat">
+            Semester 1
+            <strong id="value1">—</strong>
+        </div>
+
+    </div>
+
+    <p id="date1"></p>
+
+    <div class="signature">
+        K. Sinyangwe
+    </div>
+
+    <div>________________________</div>
+
+    <b>Developer</b>
+
+</div>
+
+
+<!-- ================= CERTIFICATE 2 ================= -->
+
+<div class="certificate" id="certificate2">
+
+    <div class="brand">SINYAX</div>
+
+    <h1>ACADEMIC CERTIFICATE</h1>
+
+    <h2>Semester 2 GPA</h2>
+
+    <p>This certificate is presented to</p>
+
+    <div class="certificate-name" id="name2">
+        Student Name
+    </div>
+
+    <p class="certificate-description">
+        This certificate recognizes the successful calculation
+        and completion of the Semester 2 GPA assessment using
+        Sinyax GPA Calculator.
+    </p>
+
+    <div class="cert-stats">
+
+        <div class="cert-stat">
+            Semester 2
+            <strong id="value2">—</strong>
+        </div>
+
+    </div>
+
+    <p id="date2"></p>
+
+    <div class="signature">
+        K. Sinyangwe
+    </div>
+
+    <div>________________________</div>
+
+    <b>Developer</b>
+
+</div>
+
+
+<!-- ================= CERTIFICATE 3 ================= -->
+
+<div class="certificate" id="certificate3">
+
+    <div class="brand">SINYAX</div>
+
+    <h1>ACADEMIC CERTIFICATE</h1>
+
+    <h2>Overall GPA</h2>
+
+    <p>This certificate is presented to</p>
+
+    <div class="certificate-name" id="name3">
+        Student Name
+    </div>
+
+    <p class="certificate-description">
+        This certificate recognizes the successful completion
+        of the academic GPA assessment for Semester 1 and
+        Semester 2 using Sinyax GPA Calculator.
+    </p>
+
+    <div class="cert-stats">
+
+        <div class="cert-stat">
+            Semester 1
+            <strong id="overall1">—</strong>
+        </div>
+
+        <div class="cert-stat">
+            Semester 2
+            <strong id="overall2">—</strong>
+        </div>
+
+        <div class="cert-stat">
+            Overall GPA
+            <strong id="overall3">—</strong>
+        </div>
+
+    </div>
+
+    <p id="date3"></p>
+
+    <div class="signature">
+        K. Sinyangwe
+    </div>
+
+    <div>________________________</div>
+
+    <b>Developer</b>
+
+</div>
+
+
+<script>
+
+/* GPA POINTS */
+
+const points = {
+    A:5,
+    "B+":4,
+    B:3,
+    C:2,
+    D:1,
+    E:0.5,
+    F:0
+};
+
+
+/* GPA STORAGE */
+
+let gpa = {
+    1:0,
+    2:0
+};
+
+let credits = {
+    1:0,
+    2:0
+};
+
+
+/* ADD SUBJECT */
+
+function addSubject(semester){
+
+    const container =
+        document.getElementById("sem"+semester);
+
+    const row =
+        document.createElement("div");
+
+    row.className = "subject";
+
+    row.innerHTML = `
+
+        <input
+            type="text"
+            class="sub"
+            placeholder="Subject name"
+        >
+
+        <input
+            type="number"
+            class="credit"
+            placeholder="Credits"
+            min="1"
+        >
+
+        <select class="grade">
+
+            <option value="A">A</option>
+            <option value="B+">B+</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+
+        </select>
+
+        <button
+            class="remove-btn"
+            onclick="this.parentElement.remove()"
+        >
+            ×
+        </button>
+    `;
+
+    container.appendChild(row);
+}
+
+
+/* CALCULATE SEMESTER */
+
+function calculate(semester){
+
+    const box =
+        document.getElementById("sem"+semester);
+
+    const rows =
+        box.querySelectorAll(".subject");
+
+    let totalPoints = 0;
+    let totalCredits = 0;
+
+    rows.forEach(row => {
+
+        const credit =
+            Number(row.querySelector(".credit").value);
+
+        const grade =
+            row.querySelector(".grade").value;
+
+        if(credit > 0){
+
+            totalPoints +=
+                credit * points[grade];
+
+            totalCredits += credit;
+        }
+
+    });
+
+    if(totalCredits === 0){
+
+        alert(
+            "Please enter subject credits first."
+        );
+
+        return;
+    }
+
+    gpa[semester] =
+        totalPoints / totalCredits;
+
+    credits[semester] =
+        totalCredits;
+
+    document.getElementById("gpa"+semester)
+        .innerText =
+        "Semester "+semester+
+        " GPA: "+
+        gpa[semester].toFixed(2);
+
+}
+
+
+/* OVERALL GPA */
+
+function calculateOverall(){
+
+    if(!credits[1] || !credits[2]){
+
+        alert(
+            "Please calculate both Semester 1 and Semester 2 first."
+        );
+
+        return;
+    }
+
+    const overall =
+        (
+            gpa[1] * credits[1] +
+            gpa[2] * credits[2]
+        )
+        /
+        (
+            credits[1] +
+            credits[2]
+        );
+
+    document.getElementById("overallGPA")
+        .innerText =
+        overall.toFixed(2);
+
+    return overall;
+}
+
+
+/* CERTIFICATE */
+
+function printCertificate(type){
+
+    const student =
+        document.getElementById("student").value
+        || "Student Name";
+
+    const today =
+        new Date().toLocaleDateString();
+
+    /* SEMESTER 1 */
+
+    if(type === 1){
+
+        if(!credits[1]){
+
+            alert(
+                "Please calculate Semester 1 GPA first."
+            );
+
+            return;
+        }
+
+        document.getElementById("name1")
+            .innerText = student;
+
+        document.getElementById("value1")
+            .innerText =
+            gpa[1].toFixed(2);
+
+        document.getElementById("date1")
+            .innerText =
+            "Date: "+today;
+
+        showCertificate("certificate1");
+    }
+
+
+    /* SEMESTER 2 */
+
+    if(type === 2){
+
+        if(!credits[2]){
+
+            alert(
+                "Please calculate Semester 2 GPA first."
+            );
+
+            return;
+        }
+
+        document.getElementById("name2")
+            .innerText = student;
+
+        document.getElementById("value2")
+            .innerText =
+            gpa[2].toFixed(2);
+
+        document.getElementById("date2")
+            .innerText =
+            "Date: "+today;
+
+        showCertificate("certificate2");
+    }
+
+
+    /* OVERALL */
+
+    if(type === 3){
+
+        if(!credits[1] || !credits[2]){
+
+            alert(
+                "Please calculate both semesters first."
+            );
+
+            return;
+        }
+
+        const overall =
+            (
+                gpa[1] * credits[1] +
+                gpa[2] * credits[2]
+            )
+            /
+            (
+                credits[1] +
+                credits[2]
+            );
+
+        document.getElementById("name3")
+            .innerText = student;
+
+        document.getElementById("overall1")
+            .innerText =
+            gpa[1].toFixed(2);
+
+        document.getElementById("overall2")
+            .innerText =
+            gpa[2].toFixed(2);
+
+        document.getElementById("overall3")
+            .innerText =
+            overall.toFixed(2);
+
+        document.getElementById("date3")
+            .innerText =
+            "Date: "+today;
+
+        showCertificate("certificate3");
+    }
+
+}
+
+
+/* SHOW CERTIFICATE AND PRINT */
+
+function showCertificate(id){
+
+    document
+        .querySelectorAll(".certificate")
+        .forEach(cert => {
+            cert.style.display = "none";
+        });
+
+    document.getElementById(id)
+        .style.display = "block";
+
+    window.print();
+
+}
+
+
+/* DEFAULT SUBJECTS */
+
+addSubject(1);
+addSubject(2);
+
+</script>
+
+</body>
+</html>
